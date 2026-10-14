@@ -501,7 +501,7 @@ a:hover { color: var(--creme); }
   margin: 0;
   padding: 0;
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: clamp(32px, 4vw, 56px) clamp(24px, 3vw, 40px);
 }
 .standard { border-top: 1px solid var(--rule); padding-top: 24px; }
