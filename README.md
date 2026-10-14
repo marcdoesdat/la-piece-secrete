@@ -22,6 +22,16 @@ python3 -m http.server 8000
 # puis ouvrir http://localhost:8000
 ```
 
+## Mise en ligne sur Netlify
+
+`netlify.toml` indique à Netlify de publier la racine du dépôt, sans build. Il suffit d'importer le dépôt dans Netlify (Add new site → Import an existing project → GitHub), avec `main` comme branche de production.
+
+Après le premier déploiement :
+
+1. **Forms → Enable form detection**, puis redéployer. Le formulaire « consultation » apparaît alors dans l'onglet Forms.
+2. **Forms → Form notifications** : ajouter une notification par courriel pour recevoir chaque demande.
+3. **Domain management** : ajouter `lapiecesecrete.ca`. Le certificat HTTPS est automatique.
+
 ## Formulaire de consultation
 
 Le formulaire est prêt pour **Netlify Forms** (`data-netlify="true"`, pot de miel `site_web`) : il suffit de déployer sur Netlify, sans autre configuration.
