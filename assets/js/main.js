@@ -143,7 +143,7 @@
       }
 
       // Pot de miel : un robot a rempli le champ caché
-      if (form.elements.site_web && form.elements.site_web.value) {
+      if (form.elements._gotcha && form.elements._gotcha.value) {
         showSuccess();
         return;
       }
@@ -151,17 +151,28 @@
       submit.disabled = true;
       submit.textContent = "Envoi en cours…";
 
-      fetch(form.getAttribute("action") || "/", {
+      // Envoi à Formspree (l'URL est dans l'attribut action du formulaire)
+      fetch(form.action, {
         method: "POST",
-        headers: {
-          "Accept": "application/json",
-          "Content-Type": "application/x-www-form-urlencoded"
-        },
-        body: new URLSearchParams(new FormData(form)).toString()
+        headers: { "Accept": "application/json" },
+        body: new FormData(form)
       })
         .then(function (res) {
-          if (!res.ok) throw new Error("HTTP " + res.status);
-          showSuccess();
+          if (res.ok) {
+            showSuccess();
+            return;
+          }
+          return res.json().catch(function () { return {}; }).then(function (data) {
+            var errors = (data && data.errors) || [];
+            var emailRejected = errors.some(function (err) { return err.field === "email"; });
+            if (emailRejected) {
+              email.setAttribute("aria-invalid", "true");
+              emailError.hidden = false;
+              email.focus();
+            } else {
+              throw new Error("HTTP " + res.status);
+            }
+          });
         })
         .catch(function () {
           status.textContent = "L’envoi n’a pas fonctionné. Réessayez dans un instant.";

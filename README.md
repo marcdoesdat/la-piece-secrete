@@ -22,11 +22,20 @@ python3 -m http.server 8000
 # puis ouvrir http://localhost:8000
 ```
 
+## Mise en ligne sur Netlify
+
+`netlify.toml` indique à Netlify de publier la racine du dépôt, sans build. Il suffit d'importer le dépôt dans Netlify (Add new site → Import an existing project → GitHub), avec `main` comme branche de production.
+
+Après le premier déploiement, dans **Domain management**, ajoutez `lapiecesecrete.ca`. Le certificat HTTPS est automatique. La détection de formulaires de Netlify n'est pas nécessaire : le formulaire passe par Formspree.
+
 ## Formulaire de consultation
 
-Le formulaire est prêt pour **Netlify Forms** (`data-netlify="true"`, pot de miel `site_web`) : il suffit de déployer sur Netlify, sans autre configuration.
+Le formulaire envoie les demandes à **Formspree** (`https://formspree.io/f/xjygadnz`, dans l'attribut `action` du `<form>`). Formspree transmet chaque demande par courriel et la conserve dans son tableau de bord.
 
-Pour un autre hébergeur, remplacez l'attribut `action="/"` du `<form>` par l'URL d'un service de formulaires (Formspree, Basin, etc.). Le script envoie les champs en `application/x-www-form-urlencoded` à cette URL et affiche le message de confirmation si la réponse est un succès (code 2xx).
+- L'envoi se fait en JavaScript (`fetch`), sans recharger la page, puis le message de confirmation s'affiche. Sans JavaScript, le formulaire s'envoie quand même normalement à Formspree.
+- Le champ courriel s'appelle `email` : Formspree s'en sert comme adresse de réponse, donc « Répondre » dans le courriel reçu écrit directement au client.
+- `_subject` donne un objet neutre aux courriels reçus : « Nouvelle demande de consultation ».
+- `_gotcha` est le pot de miel anti-robot reconnu par Formspree.
 
 Seul le champ courriel est obligatoire.
 
