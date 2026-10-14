@@ -385,15 +385,15 @@
           <h2>Consultation confidentielle</h2>
           <p class="form-card__intro">Seul votre courriel est obligatoire. Nous vous répondons sous 24&nbsp;h.</p>
 
-          <form class="form" name="consultation" method="POST" action="/" data-netlify="true" netlify-honeypot="site_web" data-form novalidate>
-            <input type="hidden" name="form-name" value="consultation">
+          <form class="form" method="POST" action="https://formspree.io/f/xjygadnz" data-form novalidate>
+            <input type="hidden" name="_subject" value="Nouvelle demande de consultation">
             <p class="visually-hidden" aria-hidden="true">
-              <label>Ne pas remplir <input name="site_web" tabindex="-1" autocomplete="off"></label>
+              <label>Ne pas remplir <input name="_gotcha" tabindex="-1" autocomplete="off"></label>
             </p>
 
             <div class="field">
               <label for="courriel">Courriel <span class="field__req">obligatoire</span></label>
-              <input id="courriel" name="courriel" type="email" autocomplete="email" inputmode="email" required aria-describedby="courriel-erreur">
+              <input id="courriel" name="email" type="email" autocomplete="email" inputmode="email" required aria-describedby="courriel-erreur">
               <p class="field__error" id="courriel-erreur" role="alert" hidden>Entrez une adresse courriel valide.</p>
             </div>
 
@@ -465,6 +465,7 @@
         <summary>Politique de confidentialité</summary>
         <div class="privacy__body">
           <p>Les renseignements transmis par le formulaire (courriel et, si vous les fournissez, prénom ou nom de code, pièce visée, secteur, forfait et message) servent uniquement à répondre à votre demande et à planifier un appel. Ils ne sont ni vendus, ni loués, ni partagés à des fins commerciales.</p>
+          <p>Le formulaire est acheminé par Formspree, un service de traitement de formulaires dont les serveurs sont situés aux États-Unis. Vos renseignements y sont conservés le temps de traiter votre demande.</p>
           <p>Ce site n’utilise aucun témoin (cookie) publicitaire ni outil de suivi, et ses polices de caractères sont hébergées localement.</p>
           <p>Vous pouvez demander en tout temps l’accès à vos renseignements, leur correction ou leur suppression en écrivant au responsable de la protection des renseignements personnels&nbsp;: <a href="mailto:confidentialite@lapiecesecrete.ca">confidentialite@lapiecesecrete.ca</a>.</p>
         </div>
